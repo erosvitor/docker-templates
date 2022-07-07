@@ -1,0 +1,49 @@
+
+MYSQL AND WORKBENCH IN DOCKER CONTAINERS
+====================================================================================================
+
+
+Installing MySQL
+----------------------------------------------------------------------------------------------------
+
+- Download Docker MySQL image
+
+  $ docker pull mysql:8.0.28
+  
+- Check if image was downloaded
+
+  $ docker image ls
+  
+- Create the container
+
+  $ docker run -d \
+               -p 3306:3306 \
+               -e MYSQL_ROOT_USER=root \
+               -e MYSQL_ROOT_PASSWORD=root \
+               -v ~/db-dockers/mysql:/var/lib/mysql \
+               --name mysql-8.0.28 \
+               mysql:8.0.28
+               
+- Check if container was created
+
+  $ docker container ls
+
+- Check the logs
+  
+  $ docker container logs mysql-8.0.28
+
+- Access the container
+
+  $ docker exec -it mysql-8.0.28 /bin/bash
+  
+- Get IP address
+
+  $ docker inspect mysql-8.0.28 | grep IPAddress
+  
+
+Installing Workbench
+----------------------------------------------------------------------------------------------------
+
+THERE IS NOT OFFICIAL IMAGE
+  
+

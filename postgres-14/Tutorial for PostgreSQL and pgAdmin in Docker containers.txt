@@ -1,0 +1,82 @@
+
+POSTGRESQL AND PGADMIN IN DOCKER CONTAINERS
+====================================================================================================
+
+
+Installing Postgresql
+----------------------------------------------------------------------------------------------------
+
+- Download Docker PostgreSQL image
+
+  $ docker pull postgres:14.2
+  
+- Check if image was downloaded
+
+  $ docker image ls
+  
+- Create the container
+
+  $ docker run -d \
+               -p 5432:5432 \
+               -e POSTGRES_USER=postgres \
+               -e POSTGRES_PASSWORD=postgres \
+               -v ~/db-dockers/postgres:/var/lib/postgresql/data \
+               --name postgres-14.2 \
+               postgres:14.2
+               
+- Check if container was created
+
+  $ docker container ls
+  
+- Check the logs
+  
+  $ docker container logs postgres-14.2
+
+- Access the container
+
+  $ docker exec -it postgres-14.2 /bin/bash
+  
+- Get IP address
+
+  $ docker inspect postgres-14.2 | grep IPAddress
+
+
+Installing pgAdmin
+----------------------------------------------------------------------------------------------------
+
+- Download Docker pgAdmin image
+
+  $ docker pull dpage/pgadmin4:6.8
+  
+- Create the container
+
+  $ docker run -d \
+               -p 82:80 \
+               -e 'PGADMIN_DEFAULT_EMAIL=postgres@domain.local' \
+               -e 'PGADMIN_DEFAULT_PASSWORD=postgres' \
+               --name pgadmin \
+               dpage/pgadmin4:6.8
+
+- Access pgAdmin
+
+  http://localhost:82
+  
+  Type 'postgres@domain.local' in the 'Email Address' field and 'postgres' in the 'Password' field
+
+- Creating connection for Postgres Docker
+
+  - Click right button on Servers then select Register > Server
+  
+  - On 'Register - Server' window type a name for your connection in 'Name' field
+  
+  - Select 'Connection' tab
+  
+  - Type the Postgres Docker IP in 'Host name/address' field
+  
+  - Type the password in 'Password' field
+  
+  - Click on 'Save' button
+  
+  FINISH!!! Now you can manage your databases easily
+  
+
